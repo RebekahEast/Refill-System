@@ -1,0 +1,152 @@
+//refill management system
+#include<iostream>
+#include<stdio.h>
+#include <ctime>
+using namespace std;
+
+//creating a class
+class Refill {
+   public:
+        double amount;
+        string item;
+        double cost;
+        bool in_stock;
+};
+
+   char again = 'Y';
+
+int main (){
+    
+    // creating a while loop using the user defined data type 'again'
+    while (again == 'y' || again == 'Y'){ 
+
+    // refill Specifications // struggled with constructors
+    Refill Refill1; Refill1.amount = 2.1; Refill1.item = "fusilli pasta"; Refill1.cost = 0.35; Refill1.in_stock = true;
+    Refill Refill2; Refill2.amount = 2.0; Refill2.item = "arborio rice"; Refill2.cost = 0.4; Refill2.in_stock = true;
+    Refill Refill3; Refill3.amount = 1.7; Refill3.item = "porridge oats"; Refill3.cost = 0.25; Refill3.in_stock = true;
+    Refill Refill4; Refill4.amount = 2.1; Refill4.item = "orzo"; Refill4.cost = 0.4; Refill4.in_stock = true;
+    Refill Refill5; Refill5.amount = 5.0; Refill5.item = "olive oil"; Refill5.cost = 1.2; Refill5.in_stock = true;
+    Refill Refill6; Refill6.amount = 6.0; Refill6.item = "coffee beans"; Refill6.cost = 3.0; Refill6.in_stock = true;
+    Refill Refill7; Refill7.amount = 0.0; Refill7.item = "black peppercorn "; Refill7.cost = 1.9; Refill7.in_stock = false;
+    Refill Refill8; Refill8.amount = 0.0; Refill8.item = "quinoa"; Refill8.cost = 0.65; Refill8.in_stock = false;
+
+
+    // create the starting menu
+    int menu;
+    cout << "\n============================ ";
+    cout << "Refill Centre Tracking System";
+    cout << " =============================";
+    cout << "\n\n\t\t\tPlease select an option below to begin\n\n" << "\tPress 1 to show all information" << "\t\tPress 2 to work out cost per weight\n";
+    cout << "\tPress 3 to check stock" << "\t\t\tPress 4 to add to basket\n\n";
+    cout << "\t\t\t\tEnter your choice: ";
+    cin >> menu;
+
+    //if statement related to menu options
+    if (menu == 1){    
+            // printing all info of refills
+            cout << "\nITEM" << "\t\tCOST (per 100g)\t" << "STOCK\n";
+            cout << endl << Refill1.item << "    || £" << Refill1.cost << "  || " << Refill1.amount << "kg\n";
+            cout << Refill2.item << "     || £" << Refill2.cost << "   || " << Refill2.amount << "kg\n";
+            cout << Refill3.item << "    || £" << Refill3.cost << "  || " << Refill3.amount << "kg\n";
+            cout << Refill4.item << "             || £" << Refill4.cost << "   || " << Refill4.amount << "kg\n";
+            cout << Refill5.item << "        || £" << Refill5.cost << "   || " << Refill5.amount << "kg\n";
+            cout << Refill6.item << "     || £" << Refill6.cost << "     || " << Refill6.amount << "kg\n";
+            cout << Refill7.item << "|| £" << Refill7.cost << "   || " << Refill7.amount << "kg\n";
+            cout << Refill8.item << "           || £" << Refill8.cost << "  || " << Refill8.amount << "kg\n";
+
+    } else if (menu == 2){
+        bool in_stock; double New_Weight; double Refill_Weight; int Refill_Options; char again = 'Y'; char run = 'Y';
+        cout << "\nWork out the cost of an item based of the amount of grams purchased.\n";
+        while (run == 'y' || run == 'Y') { 
+            cout << "Enter the weight (in grams) of the item: "; cin >> Refill_Weight;
+            cout << "\nI have the info on these refill items: 1. fusilli pasta || 2. arborio rice || 3. porridge oats || 4. orzo || 5. olive oil || 6. coffee beans || 7. black peppercorn || 8.quinoa \n\n";
+            cout << "which refill item do you need a cost for? (select from 1 to 8): "; cin >> Refill_Options;
+
+            if (Refill_Options == 1) { 
+                New_Weight = Refill_Weight * Refill1.cost;
+                
+            } else if (Refill_Options == 2) { 
+                    New_Weight = Refill_Weight * Refill2.cost;
+                
+            } else if (Refill_Options == 3) { 
+                New_Weight = Refill_Weight * Refill3.cost; 
+            
+            } else if (Refill_Options == 4) { 
+                New_Weight = Refill_Weight * Refill4.cost;  
+            
+            } else if (Refill_Options == 5) { 
+                New_Weight = Refill_Weight * Refill5.cost; 
+            
+            } else if (Refill_Options == 6) { 
+                New_Weight = Refill_Weight * Refill6.cost; 
+                
+            } else if (Refill_Options == 7) {
+                New_Weight = Refill_Weight * Refill7.cost;
+            
+            } else if (Refill_Options == 8) { 
+                New_Weight = Refill_Weight * Refill8.cost;
+            
+            } else { 
+                cout << "I don't know that option\n"; };
+            
+            if (Refill_Options > 0 && Refill_Options < 7) { // NEEDS WORK (can't pull the bool because stuck on constructors, tried (in_stock == true))
+                cout << "The cost for this item would be £" << New_Weight/100;
+            } else if (Refill_Options > 6 && Refill_Options < 9) {
+                cout << "The cost for this item would be £" << New_Weight/100 << " however, this is out of stock!";
+            } else {
+            cout << "input incorrect";
+            }
+        cout << "\nWould you like to check another item for stock? (Y/N)\n"; 
+        cin >> run;  // end while loop
+        }
+
+    } else if (menu == 3) {
+        int Stock_Check; char stock_again;
+        
+        cout << "\nSee what is in stock at the moment and when items will be back\n";
+        
+        do {
+            cout << "\nI have the info on these refill items: 1. fusilli pasta || 2. arborio rice || 3. porridge oats || 4. orzo || 5. olive oil || 6. coffee beans || 7. black peppercorn || 8.quinoa \n"; 
+            cout << "Which item would you like to check the stock of? "; 
+            cin >> Stock_Check; // NEEDS WORK (can't pull the bool because stuck on constructors) for now I'll use the ones I know are out of stock
+                
+                if (Stock_Check == 7 || Stock_Check == 8) {
+                    cout << "\nitem is out of stock.\n";
+                    time_t timetoday;
+                    time(&timetoday);
+                    cout << "Calendar date and time as per todays is : " << asctime(localtime(&timetoday)) << "The item will be back in stock next week\n"; // could this be adding time onto
+                
+                } else if (Stock_Check < 7)  {
+                    cout << "\nitem is in stock\n";
+                
+                } else {
+                    cout << "unknown response";
+                }
+
+            cout << "\nWould you like to see the stock of another item? (Y/N)\n"; 
+            cin >> stock_again;
+        } while (stock_again == 'y' || stock_again == 'Y');
+
+    } else if (menu == 4) {
+        char choice; string customer_email;
+        cout << "\n===============================================\n";
+        cout << "\nWORK IN PROGRESS - WATCH THIS SPACE :)\n";
+        cout << "\n===============================================\n";
+        cout << "would you like to be notified when the basket works? (Y/N) ";
+        cin >> choice;
+        if (choice == 'N' || choice == 'n') {
+            cout << "No worries - see you soon!\n";
+        } else if (choice == 'Y' || choice == 'y') {
+            cout << "please input your email here: "; cin >> customer_email;
+        } else {
+            cout << "input incorrect\n";
+        }
+    
+    } else {
+            cout << "That option is not available. Would you like to select another option? (Y/N)\n"; 
+            cin >> again; 
+    }
+        cout << "\nWould you like to select another option from the menu? (Y/N)\n";
+        cin >> again;
+    } 
+}
